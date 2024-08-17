@@ -1,10 +1,10 @@
 
 import express from "express";
 import dotenv from "dotenv";
-import { db } from "../src/models/index.js";
-import { allAdminVerifyRoutes } from "./Routes/adminVerifyRoutes.js";
-import { allcardUpdateRoutes } from "./Routes/cardupdateRoutes.js";
-import { configViewEngine } from "./config/configfils.js";
+import { db } from "./src/models/index.js";
+import { allAdminVerifyRoutes } from "./src/Routes/adminVerifyRoutes.js";
+import { allcardUpdateRoutes } from "./src/Routes/cardupdateRoutes.js";
+import { configViewEngine } from "./src/config/configfils.js";
 
 
 const app = express();
