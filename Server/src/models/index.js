@@ -2,6 +2,7 @@
 import dotenv from "dotenv";
 
 import { DataTypes, Sequelize, Model } from "sequelize";
+import mysql2 from "mysql2";
 
 dotenv.config();
 
@@ -13,7 +14,8 @@ const DB_host = process.env.DB_HOST;
 const sequelize = new Sequelize(DB_name, DB_username, DB_password, {
   host: DB_host,
   logging:false,
-  dialect: 'mysql'
+  dialect: 'mysql',
+  dialectModule : mysql2
 });
 
 
