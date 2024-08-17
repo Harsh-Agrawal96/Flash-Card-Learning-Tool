@@ -25,6 +25,11 @@ let allAdminVerifyRoutes = (app) => {
 
         res.json("ok");
     } );
+    routes.get( "/here", (req,res) => {
+         res.send(
+            "by"
+         )
+    })
 
     return app.use("/", routes);
 }

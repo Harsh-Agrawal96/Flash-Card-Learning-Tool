@@ -7,7 +7,14 @@ import cors from "cors";
 
 function configViewEngine (app) {
 
-    app.use(cors());
+    const corsConfig = {
+        origin : "*",
+        credential: true,
+        methods : ["GET", "POST", "PUT", "DELETE"],
+    };
+
+    app.use(cors(corsConfig));
+    app.options("", cors(corsConfig));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended:true}));
 
