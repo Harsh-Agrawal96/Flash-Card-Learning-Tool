@@ -30,7 +30,7 @@ const sendDataToBackend = async (formData) => {
     try {
 
       console.log( "data is " , formData);
-      const response = await fetch('http://localhost:4000/card/add', {
+      const response = await fetch('https://flash-card-learning-tool.vercel.app/add/card', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

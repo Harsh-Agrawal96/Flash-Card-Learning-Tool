@@ -1,21 +1,23 @@
 
 import express from "express";
 import dotenv from "dotenv";
-import { db } from "./src/models/index.js";
 import { allAdminVerifyRoutes } from "./src/Routes/adminVerifyRoutes.js";
 import { allcardUpdateRoutes } from "./src/Routes/cardupdateRoutes.js";
-import { configViewEngine } from "./src/config/configfils.js";
+import { cardQueryRoutes } from "./src/Routes/cardShowRoutes.js";
+import allConfigurations from "./src/config/configs.js";
 
-
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
-configViewEngine(app);
+allConfigurations(app);
 
 
 
 allAdminVerifyRoutes(app);
 allcardUpdateRoutes(app);
+cardQueryRoutes(app);
+
 
 app.get("/", (req,res) => {
     res.send("hello world");

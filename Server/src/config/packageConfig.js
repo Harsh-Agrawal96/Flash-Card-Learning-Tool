@@ -1,11 +1,10 @@
 
-
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 
 
-function configViewEngine (app) {
+function configLibraries (app) {
 
     const corsConfig = {
         origin : "*",
@@ -15,11 +14,12 @@ function configViewEngine (app) {
 
     app.use(cors(corsConfig));
     app.options("", cors(corsConfig));
+
+
+    // body parser
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended:true}));
 
 };
 
-export {
-    configViewEngine,
-}
+export default configLibraries

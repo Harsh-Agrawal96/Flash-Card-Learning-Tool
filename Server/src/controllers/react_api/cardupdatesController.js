@@ -1,5 +1,24 @@
 
-import * as updatecard from "../../services/cardupdateServices.js";
+import * as updatecardsevice from "../../services/cardupdateServices.js";
+
+
+
+let sampleCardAdd = async ( req,res ) => {
+
+    try{
+
+        console.log(req.body);
+        await updatecardsevice.addcard(req.body);
+
+        res.status(500).json({ success: true, message: 'question added' })
+
+    }
+    catch(err){
+        console.log(err);
+
+        res.status(401).json({ success: false, message: err })
+    }
+}
 
 
 let cardAdding = async ( req,res ) => {
@@ -56,5 +75,6 @@ export {
 
     cardAdding,
     cardRemove,
-    cardUpdate
+    cardUpdate,
+    sampleCardAdd
 }

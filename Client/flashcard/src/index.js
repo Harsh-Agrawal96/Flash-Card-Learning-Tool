@@ -1,29 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './index.css';
 import HomePage from './views/home.jsx';
 import App from './App';
+import LogoImg from "./public/images/logo.png";
 import LoginForm from './loginform';
 import AddCardForm from './addcard';
-import CardCarousel from './usercard.jsx';
+import ObjCards from './views/usercard/objCard.jsx';
+import McqsCards from './views/usercard/mcqscard.jsx';
 import reportWebVitals from './reportWebVitals';
-
-
-const cards = [
-  "Card 1: This is the first card.",
-  "Card 2: This is the second card.",
-  "Card 3: This is the third card.",
-  "Card 4: This is the fourth card.",
-  "Card 5: This is the fifth card."
-];
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <div>
-    <HomePage />
-  </div>
+  <Router>
+            <div>
+                <header>
+                    <div class="logo">
+                        <img src={LogoImg} alt='ok'/>
+                    </div>
+                </header>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/card/objective" element={<ObjCards />} />
+                    <Route path="/card/mcq" element={<McqsCards />} />
+                    <Route path="/add" element={<AddCardForm />} />
+                    <Route path='/login' element={< LoginForm/>} />
+                    <Route path="*" element={<h1>404 Not Found</h1>} />
+                </Routes>
+                <footer>
+                    <div class="fotter_para">
+                        <p>&copy; 2024 MyWebsite. All rights reserved.</p>
+                    </div>
+                </footer>
+            </div>
+            
+        </Router>
 );
 
 reportWebVitals();

@@ -8,6 +8,8 @@ let routes = express.Router();
 
 let allcardUpdateRoutes = (app) => {
 
+    routes.post( "/add/card", updatecard.sampleCardAdd );
+
     routes.post( "/card/remove", updatecard.cardRemove );
 
     routes.post( "/card/add", updatecard.cardAdding );

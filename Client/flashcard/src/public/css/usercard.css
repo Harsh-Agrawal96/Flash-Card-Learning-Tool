@@ -1,0 +1,164 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.card_carousel p{
+  word-wrap: break-word;
+
+}
+.card_carousel > .count_head > p{
+  font-size: 11em;
+  font-weight: 600;
+}
+
+.page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    height: max-content;
+    width: 100%;
+    padding-bottom: 2em;
+}
+.card-carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: max-content;
+    height: max-content;
+  }
+  
+  .card {
+    width: 220px;
+    height: 320px;
+    perspective: 1000px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    word-wrap: break-word;
+  }
+  
+  .card-face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2em;
+    font-size: 1.2em;
+    transition: transform 0.6s;
+    padding: 1em;
+  }
+  .card-face > div{
+    padding: 1em;
+    width: 100%;
+  }
+  
+  .card-front {
+    background-color: #f0f0f0;
+  }
+  
+  .card-back {
+    background-color: #4a90e2;
+    color: white;
+    transform: rotateY(180deg);
+    & p{
+      color: white;
+    }
+  }
+  
+  .card.flipped .card-front {
+    transform: rotateY(180deg);
+  }
+  
+  .card.flipped .card-back {
+    transform: rotateY(0deg);
+  }
+
+  .mcqcard .options-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .mcqcard .options-list li {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    text-align: left;
+    background-color: #ffffff;
+    width: 100%;
+
+    & p{
+      font-size: 0.7em;
+      margin: 0px;
+      word-wrap: break-word;
+      color: rgb(74, 74, 74);
+    }
+  }
+
+  .controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    padding-top: 2em;
+  }
+
+  .controls > button{
+    padding: 10px 13px;
+    font-size: 1em;
+    width: 6em;
+  }
+  .card-carousel span{
+    color: white;
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+
+
+@media screen and ( max-width : 450px ) {
+    .card{
+      height: 180px;
+      width: 120px;
+    }
+    .card-carousel{
+      gap: 1em;
+    }
+    .card-face{
+      font-size: 0.8em;
+      gap: 1.2em;
+      padding: 0.7em;
+    }
+    .mcqcard .options-list li{
+
+      & p{
+        font-size: 0.5em;
+      }
+    }
+    .controls{
+      gap: 1.4em;
+      padding-top: 1.1em;
+      & > button{
+        font-size: 0.6em;
+      }
+    }
+    .card-carousel span{
+      font-size: 1em;
+    }
+
+}
+
+  

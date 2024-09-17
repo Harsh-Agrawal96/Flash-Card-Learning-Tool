@@ -15,15 +15,17 @@
     margin: auto;
   }
   
-  p {
+  .inner_container p {
     font-size: 1.5em;
     color: #333;
     margin-bottom: 20px;
     font-weight: 600;
+    width: max-content;
+    margin: 20px auto;
   }
   
   .card_numbers {
-    width: 100%;
+    width: 60%;
     padding: 10px;
     font-size: 16px;
     border-radius: 4px;
@@ -34,6 +36,7 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    margin: 0.8em;
   }
   
   .card_numbers:focus {
@@ -44,11 +47,11 @@
   
   .inner_container .result {
     margin-top: 1em;
-    font-size: 1em;
+    font-size: 0.6em;
     color: #007bff;
   }
-  .submit-button {
-    margin-top: 1em;
+  .submit-btn {
+    width: 40%;
     padding: 0.5em 1em;
     font-size: 16px;
     border: none;
@@ -57,14 +60,58 @@
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 1em auto;
   }
   
-  .submit-button:disabled {
+  .submit-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
   }
   
-  .submit-button:hover:enabled {
+  .submit-btn:hover:enabled {
     background-color: #0056b3;
   }
+  .questype{
+    color: black;
+    font-weight: 550;
+    font-size: 1em;
+  }
+
+  @media screen and (min-width:300px)  and (max-width : 700px) {
+    .inner_container p{
+      font-size: 1em;
+    }
+    .card_numbers{
+      width: 70%;
+      font-size: 0.8em;
+    }
+    .submit-btn{
+      font-size: 0.8em;
+      width: 50%;
+      margin: 0.8em auto;
+    }
+    .inner_container .result {
+      margin-top: 0.6em;
+      font-size: 0.8em;
+    }
+  }
+  @media screen and (max-width : 350px) {
+    .inner_container p{
+      font-size: 0.7em;
+    }
+    .card_numbers{
+      width: 60%;
+      font-size: 0.6em;
+    }
+    .submit-btn{
+      font-size: 0.7em;
+      width: 40%;
+      margin: 0.6em auto;
+    }
+    .inner_container .result {
+      margin-top: 0.4em;
+      font-size: 0.7em;
+    }
+  }
+  
   

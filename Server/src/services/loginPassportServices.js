@@ -1,87 +1,87 @@
 
-import { db } from "../models/index.js";
+// import { db } from "../models/index.js";
 
 
-let findAdmin = async ( email ) => {
+// let findAdmin = async ( email ) => {
 
-    return new Promise ( async ( resolve, reject ) => {
+//     return new Promise ( async ( resolve, reject ) => {
 
-        try{
+//         try{
 
-            let admin = db.admin.findAll({
-                where : {
-                    email : email
-                }
-            })
+//             let admin = db.admin.findAll({
+//                 where : {
+//                     email : email
+//                 }
+//             })
 
-            let data = JSON.stringify(admin);
-            if( data.length > 2 ){
-                return resolve(admin);
-            }else{
-                reject();
-            }
+//             let data = JSON.stringify(admin);
+//             if( data.length > 2 ){
+//                 return resolve(admin);
+//             }else{
+//                 reject();
+//             }
 
-        }
-        catch(err){
-            console.log(err)
-            reject(err);
-        }
-    })
-}
-
-
-let checkPassword = async ( password, user ) => {
-
-    return new Promise ( async ( resolve, reject ) => {
-
-        try{
-
-            if( user[0].dataValues.password === password ){
-                resolve(true);
-            }else{
-                resolve(false);
-            }
-
-        }
-        catch(err){
-            console.log(err)
-            reject(err);
-        }
-    })
-}
+//         }
+//         catch(err){
+//             console.log(err)
+//             reject(err);
+//         }
+//     })
+// }
 
 
-let findAdminforDeserialize = async ( id ) => {
+// let checkPassword = async ( password, user ) => {
 
-    return new Promise ( async ( resolve, reject ) => {
+//     return new Promise ( async ( resolve, reject ) => {
 
-        try{
+//         try{
 
-            let admin = db.admin.findAll({
-                where : {
-                    id : id
-                }
-            })
+//             if( user[0].dataValues.password === password ){
+//                 resolve(true);
+//             }else{
+//                 resolve(false);
+//             }
 
-            let data = JSON.stringify(admin);
-            if( data.length > 2 ){
-                return resolve(admin);
-            }else{
-                reject();
-            }
-
-        }
-        catch(err){
-            console.log(err)
-            reject(err);
-        }
-    })
-}
+//         }
+//         catch(err){
+//             console.log(err)
+//             reject(err);
+//         }
+//     })
+// }
 
 
-export {
+// let findAdminforDeserialize = async ( id ) => {
 
-    findAdmin,
-    checkPassword,
-    findAdminforDeserialize
-}
+//     return new Promise ( async ( resolve, reject ) => {
+
+//         try{
+
+//             let admin = db.admin.findAll({
+//                 where : {
+//                     id : id
+//                 }
+//             })
+
+//             let data = JSON.stringify(admin);
+//             if( data.length > 2 ){
+//                 return resolve(admin);
+//             }else{
+//                 reject();
+//             }
+
+//         }
+//         catch(err){
+//             console.log(err)
+//             reject(err);
+//         }
+//     })
+// }
+
+
+// export {
+
+//     findAdmin,
+//     checkPassword,
+//     findAdminforDeserialize
+// }

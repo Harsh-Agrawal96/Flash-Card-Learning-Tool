@@ -11,3 +11,61 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+header{
+  padding: 1.8em;
+  position: fixed;
+  z-index: 100;
+  bottom: 0px;
+  height: 7.3em;
+  width: 100%;
+  top: 0px;
+
+  & .logo{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+    margin: auto;
+  }
+  & img{
+    height: 100%;
+  }
+}
+header > .logo{
+  width: 100%;
+}
+@media screen and (min-width:1300px) {
+  header > .logo{
+    width: 1300px;
+  }
+}
+@media screen and ( max-width:800px) and (min-width:600px){
+  header{
+    padding: 1.3em;
+    height: 6em;
+  }
+}
+@media screen and ( max-width:600px) {
+  header{
+    padding: 1.3em;
+    height: 5em;
+  }
+}
+
+
+
+footer {
+  background: #222;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  position: fixed;
+  z-index: 100;
+  bottom: 0px;
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+}
