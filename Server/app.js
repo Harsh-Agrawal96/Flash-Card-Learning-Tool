@@ -3,7 +3,8 @@ import express from "express";
 import dotenv from "dotenv";
 import { allAdminVerifyRoutes } from "./src/Routes/adminVerifyRoutes.js";
 import { allcardUpdateRoutes } from "./src/Routes/cardupdateRoutes.js";
-import { cardQueryRoutes } from "./src/Routes/cardShowRoutes.js";
+import { cardShowRoutes } from "./src/Routes/cardShowRoutes.js";
+import { allCardQueryRoutes } from "./src/Routes/cardQueryRoutes.js";
 import allConfigurations from "./src/config/configs.js";
 
 dotenv.config();
@@ -16,7 +17,8 @@ allConfigurations(app);
 
 allAdminVerifyRoutes(app);
 allcardUpdateRoutes(app);
-cardQueryRoutes(app);
+cardShowRoutes(app);
+allCardQueryRoutes(app);
 
 
 app.get("/", (req,res) => {

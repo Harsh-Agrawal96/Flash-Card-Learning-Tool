@@ -1,6 +1,6 @@
 
 import express from "express";
-import * as updatecard from "../controllers/react_api/cardupdatesController.js";
+import * as updateCard from "../controllers/react_api/cardUpdateController.js";
 
 
 let routes = express.Router();
@@ -8,13 +8,11 @@ let routes = express.Router();
 
 let allcardUpdateRoutes = (app) => {
 
-    routes.post( "/add/card", updatecard.sampleCardAdd );
+    routes.post( "/card/add", updateCard.addCard );
 
-    routes.post( "/card/remove", updatecard.cardRemove );
+    routes.post( "/card/delete", updateCard.deleteCard );
 
-    routes.post( "/card/add", updatecard.cardAdding );
-
-    routes.post( "card/update", updatecard.cardUpdate );
+    routes.post( "/card/update", updateCard.updateCard );
 
 
     return app.use("/", routes);

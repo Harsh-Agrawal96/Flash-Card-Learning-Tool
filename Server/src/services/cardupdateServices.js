@@ -1,142 +1,162 @@
 
 import { mcqsCard } from "../models/mcqsCard.js";
 import { objCard } from "../models/objectiveCard.js";
-import dotnev from "dotenv";
+import { admin } from "../models/admins.js";
 
 
-dotnev.config();
+let cardDeletion = async (type, cardId) => {
 
-
-let addcard = async ( req_body ) => {
-
-    return new Promise( async ( resolve,reject ) => {
-
+    return new Promise ( async (resolve,reject) => {
         try{
 
-            if( req_body.questype == 1 ){ // mcqs type question
-
-                const card = new mcqsCard({
-                    Question: req_body.que, 
-                    ChooseA : req_body.options.optionA,
-                    ChooseB : req_body.options.optionB, 
-                    ChooseC : req_body.options.optionC, 
-                    ChooseD : req_body.options.optionD,
-                    answerOption : req_body.mcqans,
-                    addedby : process.env.SecretAdmin
+            if( type == 1){
+                const result = await mcqsCard.deleteOne({
+                    _id : cardId
                 })
-                await card.save();
-
-                return resolve("added mcqs question");
+                return resolve();
             }
-            if( req_body.questype == 2 ){ // objective type question
-    
-                const card = new objCard({
-                    Question: req_body.que, 
-                    Answer : req_body.ans, 
-                    addedby : process.env.SecretAdmin
-                })
-                await card.save();
-
-                return resolve("added objective question");
-            }
-    
-            return reject("invalid input fields");
-        }
-        catch(err){
-            console.log(err);
+            const result = await objCard.deleteOne({
+                _id : cardId
+            })
+            return resolve();
+            
+        }catch(err){
             reject(err);
         }
+    })
+}
 
+let cardAddition = async (data) => {
+
+    return new Promise( async ( resolve,reject ) => {
+        try{
+
+            if( data.questype == 1 ){
+
+                const card = new mcqsCard({ // mcqs type question
+                    Question: data.que, 
+                    ChooseA : data.options.optionA,
+                    ChooseB : data.options.optionB, 
+                    ChooseC : data.options.optionC, 
+                    ChooseD : data.options.optionD,
+                    answerOption : data.mcqans,
+                    addedby : data.adminId
+                })
+                await card.save();
+
+                return resolve();
+            }
+            if( data.questype == 2 ){ // objective type question
+    
+                const card = new objCard({
+                    Question: data.que, 
+                    Answer : data.ans, 
+                    addedby : data.adminId
+                })
+                await card.save();
+
+                return resolve();
+            }
+    
+            reject();
+        }
+        catch(err){
+            reject(err);
+        }
     })
 }
 
 
-// import { db } from "../models/index.js";
+let cardUpdation = async (data) => {
 
-// let addingCard = ( data_body ) => {
+    return new Promise( async ( resolve,reject ) => {
+        try{
 
-//     return new Promise ( async ( resolve, reject ) => {
+            if( data.questype == 1 ){ // mcqs type question
+                const result = await mcqsCard.updateOne( { _id : data.id },
+                    {
+                        Question: data.que, 
+                        ChooseA : data.options.optionA,
+                        ChooseB : data.options.optionB, 
+                        ChooseC : data.options.optionC, 
+                        ChooseD : data.options.optionD,
+                        answerOption : data.mcqans,
+                    }
+                )
 
-//         try{
+                return resolve();
+            }
+            if( data.questype == 2 ){ // objective type question
+                const result = await objCard.updateOne( { _id : data.id },
+                    {
+                        Question: data.que, 
+                        Answer : data.ans, 
+                    }
+                )
 
-//             const card = await db.card.build({
-//                 cardques : data_body.que,
-//                 cardans : data_body.ans
-//             });
-//             await card.save();
-
-//             resolve("done!");
-//         }
-//         catch(err){
-//             console.log(err);
-//             reject(err);
-//         }
-//     })
-// }
-
-
-// let removecard = async (id) => {
-
-//     return new Promise ( async ( resolve, reject ) => {
-
-//         try{
-
-//             await db.card.destroy({
-//                 where: {
-//                     id: id
-//                 },
-//             });
-
-//             resolve("deleted!");
-//         }
-//         catch(err){
-//             console.log(err);
-//             reject(err);
-//         }
-//     })
-// }
-
-// let changecard = async ( data_body ) => {
-
-//     return new Promise ( async ( resolve, reject ) => {
-
-//         try{
-
-//             let card = await db.card.findAll({
-//                 where : {
-//                     id : data_body.id
-//                 }
-//             })
-
-//             let data = JSON.stringify(card);
-//             if( data.length <= 2 ){
-//                 return reject("card is not avaialable");
-//             }
-
-//             await db.card.update(
-//                 { cardques : data_body.question, cardans : data_body.answer },
-//                 {
-//                     where : {
-//                         id : data_body.id
-//                     },
-//                 },
-//             )
-
-//             resolve("done!");
-            
-//         }
-//         catch(err){
-//             console.log(err);
-//             reject(err);
-//         }
-//     })
-// }
-
-export {
-
-//     addingCard,
-//     removecard,
-//     changecard
-    addcard
+                return resolve();
+            }
+    
+            reject();
+        }
+        catch(err){
+            reject(err);
+        }
+    })
 }
 
+
+let getAdmin = async (id,key) => {
+
+    return new Promise ( async (resolve,reject) => {
+        try{
+            const user = await admin.findOne({
+                _id : id,
+                securityKey : key
+            })
+            resolve(user);
+        }catch(err){
+            reject(err);
+        }
+    })
+}
+
+let getMcqsCard = async (id, adminId) => {
+
+    return new Promise ( async (resolve,reject) => {
+        try{
+            const card = await mcqsCard.findOne({
+                _id : id,
+                addedby : adminId
+            })
+            resolve(card);
+        }catch(err){
+            reject(err);
+        }
+    })
+}
+
+let getObjCard = async (id, adminId) => {
+    
+    return new Promise ( async (resolve,reject) => {
+        try{
+            const card = await objCard.findOne({
+                _id : id,
+                addedby : adminId
+            })
+            resolve(card);
+        }catch(err){
+            reject(err);
+        }
+    })
+}
+
+
+export{
+    cardDeletion,
+    cardUpdation,
+    cardAddition,
+    getAdmin,
+    getMcqsCard,
+    getObjCard
+}

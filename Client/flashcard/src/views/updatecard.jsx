@@ -1,66 +1,101 @@
-import React, { useState } from 'react';
-import './addcard.css'; // Import the CSS file
-import { addingcardtodb } from './apiIntereaction';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import '../public/css/cardcrud.css';
+import { updateCardQuery } from '../backendApicall/cardCrud';
+import { unknownError as Err, loginError as logErr } from '../utils/responses';
 
-function AddCardForm() {
+const UpdateCard = () => {
+
+
+  const [id,setId] = useState('');
   const [formData, setFormData] = useState({
-    question: '',
-    answer: ''
-  });
-  const [questype, setquestype ] = useState('');
-  const [ options, setoptions ] = useState({
-    optionA : '',
-    optionB : '', 
-    optionC : '', 
-    optionD : ''
-  })
-  const [mcqans, setmcqans] = useState('')
-
-
-  const handleQuesType = async (e) =>{
-    console.log(questype);
-    setquestype(e.target.value);
-    console.log(questype);
-  }
-
-  const handleMcqAns = async ( e ) => {
-    setmcqans(e.target.value);
-  }
-
-  const handleOptoinsChange = async (e) => {
-
-    const { name, value } = e.target;
-    setoptions({
-      ...options,
-      [name] : value
-    })
-  }
-
-  const handleChange = async (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
+      question: '',
+      answer: ''
     });
-  };
+    const [questype, setquestype ] = useState('');
+    const [ options, setoptions ] = useState({
+      optionA : '',
+      optionB : '', 
+      optionC : '', 
+      optionD : ''
+    })
+    const [mcqans, setmcqans] = useState('');
+    const [key, setKey] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    let ans = formData.answer;
-    let que = formData.question;
+  const navigate = useNavigate();
 
-    const data = { ans, que, questype, options , mcqans };
-    console.log(data);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
-    await addingcardtodb(data);
-  };
+    if (!token || !userDetails) {
+      navigate('/', { state : { message : logErr, type : 'msg'}});
+    }
+  }, [navigate]);
+  const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+  
+    const handleMcqAns = async ( e ) => {
+      setmcqans(e.target.value);
+    }
+  
+    const handleOptoinsChange = async (e) => {
+  
+      const { name, value } = e.target;
+      setoptions({
+        ...options,
+        [name] : value
+      })
+    }
+  
+    const handleChange = async (e) => {
+      const { name, value } = e.target;
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    };
+
+    const handleSubmit = async (e) => {
+      try{
+        e.preventDefault();
+      
+        let ans = formData.answer;
+        let que = formData.question;
+        const adminId = userDetails.msg._id;
+  
+        const data = { id, ans, que, questype, options , mcqans, key, adminId };
+  
+        const resData = await updateCardQuery(data);
+  
+        navigate('/profile', { state : { message : resData.msg, type : 'success'} });
+      }catch(err){
+        let errorMessages = [];
+        try {
+          errorMessages = JSON.parse(err.message);
+        } catch {
+          errorMessages = Err;
+        }
+        navigate('/profile',{ state : { message : errorMessages, type : 'error'} } );
+      }
+    };
+
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <div className="form-group">
-        <label htmlFor="question">Question:</label>
+        <label htmlFor="question">Card id:</label>
         <input
+          type="text"
+          name="id"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="question">Question:</label>
+        <textarea
           type="text"
           id="question"
           name="question"
@@ -72,7 +107,7 @@ function AddCardForm() {
 
       <div className="form-group">
         <label htmlFor="answer">Select question type :</label>
-        <select className="card_numbers" name='quesType' value={questype} onChange={handleQuesType}>
+        <select className="card_numbers" name='quesType' value={questype} onChange={(e) => setquestype(e.target.value)}>
             <option value="" disabled>Select</option>
             <option value="1">Mcqa type questions</option>
             <option value="2">objective type questins</option>
@@ -127,7 +162,7 @@ function AddCardForm() {
       {  questype == 2 && (
           <div className="form-group">
               <label htmlFor="answer">Answer:</label>
-              <input
+              <textarea
                 type="text"
                 id="answer"
                 name="answer"
@@ -150,10 +185,20 @@ function AddCardForm() {
           </div>
       )}
 
+        <div className="form-group">
+          <label htmlFor="securityKey">Key:</label>
+          <input
+            type="number"
+            name="key"
+            value={key}
+            onChange={(e) => setKey(e.target.value)}
+            required
+          />
+        </div>
 
       <button type="submit" className="submit-button">Submit</button>
     </form>
   );
 }
 
-export default AddCardForm;
+export default UpdateCard

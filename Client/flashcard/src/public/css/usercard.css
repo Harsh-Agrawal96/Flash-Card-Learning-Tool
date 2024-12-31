@@ -1,8 +1,10 @@
 *{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
+
+
 
 .card_carousel p{
   word-wrap: break-word;
@@ -28,18 +30,18 @@
     align-items: center;
     width: max-content;
     height: max-content;
-  }
-  
-  .card {
-    width: 220px;
-    height: 320px;
-    perspective: 1000px;
-    cursor: pointer;
-    text-align: center;
-    position: relative;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    word-wrap: break-word;
+
+    & > .card {
+      width: 220px;
+      height: 320px;
+      perspective: 1000px;
+      cursor: pointer;
+      text-align: center;
+      position: relative;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      word-wrap: break-word;
+    }
   }
   
   .card-face {
@@ -130,12 +132,13 @@
 
 
 @media screen and ( max-width : 450px ) {
-    .card{
-      height: 180px;
-      width: 120px;
-    }
     .card-carousel{
       gap: 1em;
+
+      & > .card{
+        height: 180px;
+        width: 120px;
+      }
     }
     .card-face{
       font-size: 0.8em;

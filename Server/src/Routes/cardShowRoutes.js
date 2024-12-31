@@ -1,11 +1,11 @@
 
 import express from "express";
-import givecards from "../controllers/react_api/cardqueryController.js";
+import givecards from "../controllers/react_api/showCardController.js";
 
 
 let Routes = express.Router();
 
-let cardQueryRoutes = ( app ) => {
+let cardShowRoutes = ( app ) => {
 
     Routes.post( "/give/cards", givecards );
 
@@ -13,5 +13,5 @@ let cardQueryRoutes = ( app ) => {
 }
 
 export {
-    cardQueryRoutes
+    cardShowRoutes
 }

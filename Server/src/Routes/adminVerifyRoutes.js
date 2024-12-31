@@ -1,11 +1,6 @@
 
 import express from "express";
-import { passportOfAdmin } from "../controllers/react_api/loginPassportController.js";
-import passport from "passport";
-
-
-
-passportOfAdmin();
+import { handleLogin } from "../controllers/react_api/verifyController.js";
 
 
 let routes = express.Router();
@@ -13,28 +8,11 @@ let routes = express.Router();
 
 let allAdminVerifyRoutes = (app) => {
 
-    // routes.post( "/login", passport.authenticate( "local", {
-    //     successRedirect : "/",
-    //     failureRedirect : "/login",
-    //     successFlash : true,
-    //     failureFlash : true
-    // }) );
-
-    routes.post( "/login", ( req,res ) => {
-        console.log(req.body);
-
-        res.json("ok");
-    } );
-    routes.get( "/here", (req,res) => {
-         res.send(
-            "by"
-         )
-    })
+    routes.post( "/login", handleLogin);
 
     return app.use("/", routes);
 }
 
 export {
-
     allAdminVerifyRoutes,
 }

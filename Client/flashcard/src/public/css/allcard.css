@@ -1,0 +1,440 @@
+.all-cards-container {
+  font-family: Arial, sans-serif;
+  padding: 20px 80px;
+  max-width: 1500px;
+  margin: 5em auto;
+  margin-top: 6em;
+}
+
+.all-cards-container .toggle-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.all-cards-container .toggle-buttons button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #ddd;
+  color: #333;
+}
+
+.all-cards-container .toggle-buttons button.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.all-cards-container .cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.all-cards-container .card {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: 300px;
+  max-height: 300px;
+  overflow-wrap: break-word;
+  overflow-y: auto;
+}
+
+.all-cards-container .card div{
+  margin-top: 1em;
+
+  & > p{
+    margin: 0px;
+    font-size: 0.9em;
+    color: rgb(74, 74, 74);
+  }
+}
+.all-cards-container .card span {
+  font-weight: 600;
+  font-size: 1em;
+  color: black;
+}
+.all-cards-container .card .uniqueId{
+  margin-top: 0px;
+  display: inline-block;
+  background-color: rgb(218, 217, 217);
+  border-radius: 3px;
+  padding: 1px 3px;
+}
+
+.all-cards-container .card .card-actions {
+  margin-top: 1.5em;
+}
+
+.all-cards-container .card-actions button {
+  margin-right: 10px;
+  padding: 7px 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.all-cards-container .card ul{
+  padding-left: 2em;
+}
+.all-cards-container .card li{
+  color: rgb(74, 74, 74);
+}
+
+.all-cards-container .card-actions button:first-of-type {
+  background-color: #f44336;
+  color: white;
+}
+
+.all-cards-container .card-actions button:last-of-type {
+  background-color: #2196f3;
+  color: white;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  width: 500px;
+  max-height: 80vh;
+  text-align: center;
+  overflow-y: auto;
+
+  & > p{
+    font-size: 0.9em;
+    margin-top: 0.5em;
+    font-weight: 600;
+    margin-bottom: 1.2em;
+  }
+}
+
+.modal-actions {
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  margin: 0 10px;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-actions button:first-of-type {
+  background-color: #f44336;
+  color: white;
+}
+
+.modal-actions button:last-of-type {
+  background-color: #4caf50;
+  color: white;
+}
+
+
+.modal-content .modal-body{
+  & div{
+    margin-bottom: 0.9em;
+  }
+  & label{
+    display: block;
+    font-size: 0.9em;
+    text-align: start;
+  }
+  & input, & .textinput{
+    width: 100%;
+    font-size: 0.9em;
+    padding: 8px;
+    margin: 10px 0;
+    margin-top: 3px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+  }
+  & select{
+    padding: 5px 7px;
+    border: 1px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+}
+
+/* Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 10px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-buttons .update-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.modal-buttons .cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.modal-buttons button:hover {
+  opacity: 0.9;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#showingOption{
+  margin-bottom: 1em;
+}
+
+@media screen and (min-width: 400px) and (max-width : 800px) {
+  
+  .modal-content {
+    padding: 10px;
+    border-radius: 7px;
+    width: 300px;
+  
+    & > p{
+      font-size: 0.7em;
+      margin-top: 0.4em;
+      margin-bottom: 1em;
+    }
+  }
+  .modal-actions {
+    margin-top: 15px;
+  }
+  .modal-actions button {
+    margin: 0 7px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.7em;
+  }
+  .modal-content .modal-body{
+    & div{
+      margin-bottom: 0.6em;
+    }
+    & label{
+      font-size: 0.7em;
+    }
+    & input, & .textinput{
+      font-size: 0.7em;
+      padding: 5px;
+      margin: 6px 0;
+      margin-top: 1px;
+      border-radius: 3px;
+    }
+    & select{
+      font-size: 0.7em;
+      padding: 3px 4px;
+    }
+  }
+  .modal-buttons {
+    margin-top: 15px;
+  }
+  .modal-buttons button {
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+  }
+}
+@media screen and (min-width: 0px) and (max-width : 400px) {
+  
+  .modal-content {
+    padding: 6px;
+    border-radius: 4px;
+    width: 150px;
+  
+    & > p{
+      font-size: 0.4em;
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+  }
+  .modal-actions {
+    margin-top: 10px;
+  }
+  .modal-actions button {
+    margin: 0 5px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-size: 0.4em;
+  }
+  .modal-content .modal-body{
+    & div{
+      margin-bottom: 0.3em;
+    }
+    & label{
+      font-size: 0.4em;
+    }
+    & input, & .textinput{
+      font-size: 0.4em;
+      padding: 3px;
+      margin: 3px 0;
+      margin-top: 0px;
+      border-radius: 1px;
+    }
+    & select{
+      font-size: 0.5em;
+      padding: 2px 3px;
+      border-radius: 1px;
+    }
+  }
+  .modal-buttons {
+    margin-top: 11px;
+  }
+  .modal-buttons button {
+    padding: 4px;
+    border-radius: 2px;
+    font-size: 0.4rem;
+  }
+}
+
+@media screen and (min-width:300px) and ( max-width : 750px) {
+
+  .all-cards-container {
+    padding: 15px 20px;
+    margin: 4em auto;
+  }
+
+  .all-cards-container .toggle-buttons {
+    margin-bottom: 15px;
+  }
+  .all-cards-container .toggle-buttons button {
+    margin: 0 7px;
+    padding: 7px 15px;
+    font-size: 0.7em;
+    border-radius: 5px;
+  }
+
+  .all-cards-container .cards-grid {
+    gap: 15px;
+  }
+  .all-cards-container .card {
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 200px;
+    max-height: 250px;
+  }
+  
+  .all-cards-container .card div{
+    margin-top: 0.7em;
+  
+    & > p{
+      font-size: 0.6em;
+    }
+  }
+  .all-cards-container .card div span {
+    font-size: 0.9em;
+  }
+  .all-cards-container .card .card-actions {
+    margin-top: 0.8em;
+  }
+  
+  .all-cards-container .card-actions button {
+    margin-right: 8px;
+    padding: 5px 11px;
+    border-radius: 3px;
+    font-size: 0.5em;
+  }
+  .all-cards-container .card ul{
+    padding-left: 2em;
+    font-size: 0.6em;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 750px) {
+  .all-cards-container{
+    margin-top: 6em;
+  }
+}
+@media screen and ( max-width : 300px) {
+
+  .all-cards-container {
+    padding: 10px 15px;
+    max-width: 1000px;
+    margin-top: 4.5em;
+  }
+
+  .all-cards-container .toggle-buttons {
+    margin-bottom: 10px;
+  }
+  .all-cards-container .toggle-buttons button {
+    margin: 0 4px;
+    padding: 4px 10px;
+    font-size: 0.5em;
+    border-radius: 3px;
+  }
+
+  .all-cards-container .cards-grid {
+    gap: 10px;
+  }
+  .all-cards-container .card {
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 7px;
+    max-height: 150px;
+    width: 100px;
+  }
+  
+  .all-cards-container .card div{
+    margin-top: 0.4em;
+  
+    & > p{
+      font-size: 0.4em;
+    }
+  }
+  .all-cards-container .card div span {
+    font-size: 0.6em;
+  }
+  .all-cards-container .card .card-actions {
+    margin-top: 0.4em;
+  }
+  
+  .all-cards-container .card-actions button {
+    margin-right: 5px;
+    padding: 3px 9px;
+    border-radius: 1px;
+    font-size: 0.4em;
+  }
+  .all-cards-container .card ul{
+    padding-left: 1.5em;
+    font-size: 0.4em;
+  }
+}

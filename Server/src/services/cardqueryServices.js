@@ -1,64 +1,60 @@
 
+import { admin } from "../models/admins.js";
 import { mcqsCard } from "../models/mcqsCard.js";
 import { objCard } from "../models/objectiveCard.js";
 
-let mcqsQuestions = async ( cardCount ) => {
 
-    return new Promise( async ( resolve,reject ) => {
+let checkAdmin = (id) => {
 
+    return new Promise( async (resolve,reject) => {
         try{
 
-            let count = Number(cardCount);
-            mcqsCard.aggregate([{ $sample: { size: count } }])
-            .then( cards => {
-
-                console.log(cards);
-                return resolve(cards);
-
+            const user = await admin.findOne({
+                _id : id
             })
-            .catch(error => {
-                return reject(error);
-            });
-        }
-        catch(err){
-            console.log(err);
+            resolve(user);
 
-            return reject(err);
+        }catch(err){
+            reject(err);
         }
-    })
+    });
 }
 
+let getMcqsCard = (id) => {
 
-let objectiveQuestions = async ( cardCount ) => {
-    
-    return new Promise( async ( resolve,reject ) => {
-
+    return new Promise( async (resolve,reject) => {
         try{
-            console.log("hsere");
-            let count = Number(cardCount);
-            objCard.aggregate([{ $sample: { size: count } }])
-            .then( cards => {
 
-                console.log(cards);
-                return resolve(cards);
-
+            const cards = await mcqsCard.find({
+                addedby : id
             })
-            .catch(error => {
-                return reject(error);
-            });
-        }
-        catch(err){
-            console.log(err);
+            resolve(cards);
 
-            return reject(err);
+        }catch(err){
+            reject(err);
         }
-    })
+    });
+}
+
+let getObjCard = (id) => {
+
+    return new Promise( async (resolve,reject) => {
+        try{
+
+            const cards = await objCard.find({
+                addedby : id
+            })
+            resolve(cards);
+
+        }catch(err){
+            reject(err);
+        }
+    });
 }
 
 
-export {
-    
-    mcqsQuestions,
-    objectiveQuestions
+export{
+    checkAdmin,
+    getMcqsCard,
+    getObjCard
 }
-

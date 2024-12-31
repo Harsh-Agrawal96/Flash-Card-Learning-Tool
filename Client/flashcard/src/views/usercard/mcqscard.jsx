@@ -12,14 +12,14 @@ function McqsCards() {
   const handleNext = () => {
     if (currentIndex < cards.length - 1) {
       setCurrentIndex(currentIndex + 1);
-      setIsFlipped(false); // Reset flip state when navigating
+      setIsFlipped(false);
     }
   };
 
   const handlePrevious = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
-      setIsFlipped(false); // Reset flip state when navigating
+      setIsFlipped(false);
     }
   };
 
@@ -27,7 +27,6 @@ function McqsCards() {
     setIsFlipped(!isFlipped);
   };
 
-    // cards from database through server
     const location = useLocation();
     const navigate = useNavigate();
   
@@ -35,7 +34,6 @@ function McqsCards() {
     const arrCards = location.state || null;
   
     useEffect(() => {
-      // If no data is available, redirect to an error page or the home page
       if (arrCards == null) {
         navigate('/error');
       }

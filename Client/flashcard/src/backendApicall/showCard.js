@@ -1,25 +1,25 @@
 import { unknownError as tryErr } from "../utils/responses";
 
 
-  const queryAdminCard = async ( data ) => {
+const showCardQuery = async (formData) => {
 
-    const response = await fetch( 'http://localhost:8000/cards',{
-      method : 'POST',
-      headers : {
+    const response = await fetch('http://localhost:8000/give/cards', {
+      method: 'POST',
+      headers: {
         'Content-Type': 'application/json',
       },
-      body : JSON.stringify(data)
+      body: JSON.stringify(formData),
     });
-
+  
     const resData = await response.json();
     if( !response.ok ){
       throw new Error( JSON.stringify(resData.msg || tryErr ));
     }
 
     return resData;
+  };
+
+
+  export {
+    showCardQuery
   }
-
-
-export {
-  queryAdminCard
-}

@@ -1,9 +1,7 @@
-
 import mongoose from 'mongoose';
 
 
 const adminSchema = new mongoose.Schema({
-
     name: {
         type: String,
         required: true,
@@ -18,13 +16,14 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+    },
+    securityKey: {
+        type: Number,
+        required: true,
     }
-
 });
 
 
-
-// Create the model based on the schema
 const admin = mongoose.model('Admin', adminSchema);
 
 export { admin }

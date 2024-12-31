@@ -11,8 +11,6 @@ function configDB (app) {
 
     // connect to mongoDb
     mongoose.connect( process.env.DatabaseURL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
         serverSelectionTimeoutMS: 30000
     })
     .then(() => console.log('Connected to MongoDB'))

@@ -1,0 +1,147 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .login-container .login-form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: start;
+    width: 350px;
+    gap: 0.7em;
+
+    & > h2{
+      margin: auto;
+      font-size: 1.5em;
+      margin-bottom: 1em;
+    }
+  }
+  
+  .login-container .input-group {
+    margin-bottom: 0.5em;
+    width: 100%;
+  }
+  
+  .login-container .input-group label {
+    display: block;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+  }
+  
+  .login-container .input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0.5em;
+  }
+  
+  .login-container button:hover {
+    background-color: #0056b3;
+  }
+
+  .login-container select {
+    width: 60%;
+    padding: 10px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  .login-container select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+
+@media screen and (min-width: 300px) and (max-width: 800px) {
+  .login-container .login-form{
+    width: 200px;
+    padding: 12px;
+    gap : 0.5em;
+    border-radius: 5px;
+
+    & > h2{
+      font-size: 1.2em;
+    }
+  }
+  .login-container .input-group label{
+    font-size: 0.7em;
+    margin-bottom: 3px;
+  }
+  .login-container .input-group input{
+    font-size: 0.7em;
+    padding: 8px;
+    border-radius: 3px;
+  }
+  .login-container select {
+    width: 100%;
+    padding: 6px;
+    font-size: 0.6em;
+    border-radius: 3px;
+  }
+  .login-container button{
+    font-size: 0.7em;
+    border-radius: 3px;
+    padding: 7px;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 300px) {
+  .login-container .login-form{
+    width: 100px;
+    padding: 6px;
+    gap: 0.1em;
+    border-radius: 2px;
+
+    & > h2{
+      font-size: 0.8em;
+    }
+  }
+  .login-container .input-group label{
+    font-size: 0.4em;
+    margin-bottom: 0px;
+  }
+  .login-container .input-group input{
+    font-size: 0.4em;
+    border-radius: 1px;
+    padding: 4px;
+  }
+  .login-container select {
+    width: 100%;
+    padding: 3px;
+    font-size: 0.4em;
+    border-radius: 1px;
+  }
+  .login-container button{
+    font-size: 0.4em;
+    border-radius: 1px;
+    padding: 4px;
+  }
+}
+  
+  

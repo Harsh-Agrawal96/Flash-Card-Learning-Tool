@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './../public/css/home.css';
-import { SendCardQuery } from '../backendApicall/querycard.js';
+import { showCardQuery } from '../backendApicall/showCard.js';
+import { unknownError as Err } from '../utils/responses.js';
+import MessageDisplay from './partials/responseMessage.jsx';
 
 const cards = [
   "Card 1: This is the first card.",
@@ -13,6 +15,9 @@ const cards = [
 ];
 
 function HomePage() {
+
+  const location = useLocation();
+  const { message, type } = location.state || {};
 
   const [selectedValue, setSelectedValue] = useState('');
   const [selectedType, setSelectedType] = useState('');
@@ -27,45 +32,50 @@ function HomePage() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = { selectedType,selectedValue };
-
-    // await SendCardQuery(formData);
-
     try {
+      e.preventDefault();
 
-        console.log( "data is " , formData);
-        const response = await fetch('https://flash-card-learning-tool.vercel.app/give/cards', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
+      const formData = { selectedType,selectedValue };
+  
+      const resData = await showCardQuery(formData);
 
-        const resData = await response.json();
-        const cards = resData.data;
-
-        if (response.ok) {
-          console.log('Response:', resData);
-        } else {
-          navigate('/');
-        }
-        if( formData.selectedType == 2 ){
-          navigate('/card/objective', { state: { data: cards } });
-        }else{
-          navigate('/card/mcq', { state: { data: cards } });
-        }
-      } catch (error) {
-        alert('An error occurred: ' + error.message);
+      if( formData.selectedType == 2 ){
+        navigate('/card/objective', { state: { data: resData.msg, type : 'success' } });
+      }else{
+        navigate('/card/mcq', { state: { data: resData.msg, type : 'success' } });
       }
+    } catch (err) {
+      let errorMessages = [];
+      try {
+        errorMessages = JSON.parse(err.message);
+      } catch {
+        errorMessages = Err;
+      }
+      navigate('/',{ state : { message : errorMessages, type : 'error'} } );
+    }
     
   };
 
   return (
 
     <div className='container'>
+      <MessageDisplay/>
+      <div>
+            {message && (
+                <div
+                    style={{
+                        padding: '10px',
+                        marginBottom: '15px',
+                        borderRadius: '5px',
+                        color: type === 'success' ? '#155724' : '#721c24',
+                        backgroundColor: type === 'success' ? '#d4edda' : '#f8d7da',
+                        border: `1px solid ${type === 'success' ? '#c3e6cb' : '#f5c6cb'}`,
+                    }}
+                >
+                    {message}
+                </div>
+            )}
+        </div>
         <div className="inner_container">
 
             <p>Select card numbers and question type</p>
