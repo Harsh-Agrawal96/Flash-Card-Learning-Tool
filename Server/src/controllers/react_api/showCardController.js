@@ -7,11 +7,6 @@ let givecards = async ( req,res ) => {
 
     try{
 
-        console.log(req.body);
-        console.log(req.body.selectedType);
-        console.log(req.body.selectedValue);
-        console.log("here")
-
         if( req.body.selectedType == 1 ){
 
             let cards = await questions.mcqsQuestions(req.body.selectedValue);

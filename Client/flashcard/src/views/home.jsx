@@ -6,18 +6,12 @@ import { showCardQuery } from '../backendApicall/showCard.js';
 import { unknownError as Err } from '../utils/responses.js';
 import MessageDisplay from './partials/responseMessage.jsx';
 
-const cards = [
-  "Card 1: This is the first card.",
-  "Card 2: This is the second card.",
-  "Card 3: This is the third card.",
-  "Card 4: This is the fourth card.",
-  "Card 5: This is the fifth card."
-];
 
 function HomePage() {
 
   const location = useLocation();
   const { message, type } = location.state || {};
+  const [isLoading, setIsLoading] = useState(false);
 
   const [selectedValue, setSelectedValue] = useState('');
   const [selectedType, setSelectedType] = useState('');
@@ -34,6 +28,7 @@ function HomePage() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      setIsLoading(true);
 
       const formData = { selectedType,selectedValue };
   
@@ -59,23 +54,9 @@ function HomePage() {
   return (
 
     <div className='container'>
-      <MessageDisplay/>
-      <div>
-            {message && (
-                <div
-                    style={{
-                        padding: '10px',
-                        marginBottom: '15px',
-                        borderRadius: '5px',
-                        color: type === 'success' ? '#155724' : '#721c24',
-                        backgroundColor: type === 'success' ? '#d4edda' : '#f8d7da',
-                        border: `1px solid ${type === 'success' ? '#c3e6cb' : '#f5c6cb'}`,
-                    }}
-                >
-                    {message}
-                </div>
-            )}
-        </div>
+      { location.state?.message && ( 
+        <MessageDisplay iniMessage={message} iniMessageType={type} />
+      )}
         <div className="inner_container">
 
             <p>Select card numbers and question type</p>
@@ -107,8 +88,8 @@ question
             )}
 
             <button className="submit-btn" onClick={handleSubmit}
-                disabled = { (!selectedType || ! selectedValue) }
-            >Show cards</button>  
+                disabled = { (!selectedType || ! selectedValue || isLoading ) }
+            >{isLoading ? 'Loading...' : 'Show cards'}</button>  
 
         </div>
     </div>

@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import "../public/css/admin.css"; // Custom styling
+import "../public/css/partials/partialResMsg.css"
+import "../public/css/admin.css";
 import { loginError as logErr } from "../utils/responses";
 import MessageDisplay from "./partials/responseMessage";
 
@@ -19,8 +20,8 @@ const AdminProfile = () => {
     if (!token || !userDetails) {
       navigate('/', { state : { message : logErr, type : 'msg'}});
     }
-  }, [navigate]);
 
+  }, [navigate]);
 
   const actions = [
     { name: "Show All Cards", route: "/allcards", icon: "📄" },
@@ -31,7 +32,9 @@ const AdminProfile = () => {
 
   return (
     <div className="profile-container">
-      <MessageDisplay />
+      { location.state?.message && ( 
+        <MessageDisplay iniMessage={message} iniMessageType={type} />
+      )}
       {actions.map((action, index) => (
         <div className="card" key={index}>
           <div className="icon">{action.icon}</div>

@@ -29,8 +29,6 @@ let deleteCard = async (req,res) => {
 let performDeletion = async ( res, card, admin, cardId, type ) => {
     
     try{
-        console.log(card, admin);
-        console.log("here")
         if( !card || !admin ){
             return res.status(400).json({ success : false, msg : [ "Invalid credentials" ]});
         }
@@ -48,9 +46,6 @@ let addCard = async (req,res) => {
     
     try{
         const data = req.body;
-        if( data.mcqans == '' && data.questype == 1 ){
-            return res.status(400).json({ success: false, msg: [ "Invalid credentials" ]});
-        }
 
         const admin = await cardUpdates.getAdmin(data.adminId,data.key);
         if( admin == null ){
@@ -70,9 +65,6 @@ let updateCard = async (req,res) => {
 
     try{
         const data = req.body;
-        if( data.mcqans == '' && data.questype == 1 ){
-            return res.status(400).json({ success: false, msg: [ "Invalid credentials" ]});
-        }
 
         if( data.questype == 1 ){
             const card = await cardUpdates.getMcqsCard(data.id, data.adminId);

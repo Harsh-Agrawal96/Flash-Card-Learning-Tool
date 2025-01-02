@@ -72,7 +72,8 @@ const AllCards = () => {
 
       const resData = await deleteCardQuery(formData);
 
-      navigate('/allcards', { state : { message : resData.msg, type : 'success'} });
+      navigate('/allcards', { state : { message : resData.msg, type : 'success'}, replace : true,key: Date.now(), });
+      window.location.reload();
     }catch(err){
       let errorMessages = [];
       try {
@@ -80,7 +81,8 @@ const AllCards = () => {
       } catch {
         errorMessages = Err;
       }
-      navigate('/allcards',{ state : { message : errorMessages, type : 'error'} } );
+      navigate('/allcards',{ state : { message : errorMessages, type : 'error'}, replace : true,key: Date.now(), });
+      window.location.reload();
     }
   };
 
@@ -116,7 +118,8 @@ const AllCards = () => {
 
       const resData = await updateCardQuery(formData);
 
-      navigate('/allcards', { state : { message : resData.msg, type : 'success'} });
+      navigate('/allcards', { state : { message : resData.msg, type : 'success'}, replace : true,key: Date.now(), });
+      window.location.reload();
     }catch(err){
       let errorMessages = [];
       try {
@@ -124,13 +127,16 @@ const AllCards = () => {
       } catch {
         errorMessages = Err;
       }
-      navigate('/allcards',{ state : { message : errorMessages, type : 'error'} } );
+      navigate('/allcards',{ state : { message : errorMessages, type : 'error'}, replace : true,key: Date.now(), });
+      window.location.reload();
     }
   };
 
   return (
     <div className="all-cards-container">
-      <MessageDisplay/>
+      { location.state?.message && ( 
+        <MessageDisplay iniMessage={message} iniMessageType={type} />
+      )}
       <div className="toggle-buttons">
         <button
           className={currentType === "objective" ? "active" : ""}

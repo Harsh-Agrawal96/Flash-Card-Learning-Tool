@@ -1,55 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import "../../public/css/partials/partialResMsg.css"
+import React, { useState, useEffect } from "react";
+import "../../public/css/partials/partialResMsg.css";
 
+const MessageDisplay = ({ iniMessage, iniMessageType, duration = 3000 }) => {
+  const [visible, setVisible] = useState(false);
+  const [message, setMessage] = useState(iniMessage || []);
+  const [messageType, setMessageType] = useState(iniMessageType || "");
 
-const MessageDisplay = () => {
-    
-    const location = useLocation();
-    const [visible, setVisible] = useState(false);
-    const [message, setMessage] = useState([]);
-    const [messageType, setMessageType] = useState('');
+  useEffect(() => {
+    if (message.length > 0) {
+      setVisible(true);
+      const timer = setTimeout(() => {
+        setVisible(false);
+      }, duration);
 
-    useEffect(() => {
-        if (location.state?.message) {
-            setMessage(location.state.message);
-            setMessageType(location.state.type);
-            console.log("here")
-            console.log(message);
-            console.log("lsllsl")
-            console.log(message.length)
-            message.map((i) => {
-                console.log(i);
-            })
-            setVisible(true);
+      return () => clearTimeout(timer);
+    }
+  }, [message, duration]);
 
-            // const timer = setTimeout(() => {
-            //     setVisible(false);
-            // }, 3000);
+  const closeMessage = () => {
+    setVisible(false);
+  };
 
-            // return () => clearTimeout(timer);
-        }
-    }, [location.state]);
+  if (!visible) return null;
 
-    const closeMessage = () => setVisible(false);
-
-    return (
-        <>
-            {visible && (
-                <div className={`message-container ${messageType}`}>
-                    <button onClick={closeMessage} className="close-button">
-                        &times;
-                    </button>
-                    <div className='responseMsg' >
-                        { message.length > 0 && message.map((i) => {
-                            <p>{i}</p>
-                        })}
-                    </div>
-                    <div className={`progress-bar ${messageType}`}></div>
-                </div>
-            )}
-        </>
-    );
+  return (
+    <div className={`message-container ${messageType}`}>
+      <button onClick={closeMessage} className="close-button">
+        &times;
+      </button>
+      <div className="responseMsg">
+        {message.map((msg, index) => (
+          <p key={index}>{msg}</p>
+        ))}
+      </div>
+      <div className={`progress-bar ${messageType}`}></div>
+    </div>
+  );
 };
 
 

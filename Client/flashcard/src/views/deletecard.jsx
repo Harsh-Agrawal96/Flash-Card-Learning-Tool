@@ -9,6 +9,7 @@ const DeleteCard = () => {
   const [id, setId] = useState('');
   const [key, setKey] = useState('');
   const [questype, setquestype ] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ const DeleteCard = () => {
 
     try{
       e.preventDefault();
+      setIsLoading(true);
 
       const adminId = userDetails.msg._id;
       const formData = { id, key, questype, adminId };
@@ -78,7 +80,7 @@ const DeleteCard = () => {
             required
           />
         </div>
-        <button type="submit">Delete</button>
+        <button type="submit" disabled={isLoading}>{isLoading ? 'Loading...' : 'Delete'}</button>
       </form>
     </div>
   );

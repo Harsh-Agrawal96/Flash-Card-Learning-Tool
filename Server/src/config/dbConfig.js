@@ -9,7 +9,6 @@ function configDB (app) {
 
     dotenv.config();
 
-    // connect to mongoDb
     mongoose.connect( process.env.DatabaseURL, {
         serverSelectionTimeoutMS: 30000
     })

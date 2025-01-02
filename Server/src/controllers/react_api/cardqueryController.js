@@ -7,11 +7,8 @@ let queryCards = async (req,res) => {
 
     try{
         const data = req.body;
-        console.log(data);
-        console.log("see")
 
         const admin = await queryCardService.checkAdmin(data.adminId);
-        console.log(admin);
         if( !admin ){
             return res.status(400).json({ success: false, msg : ["Invalid Credentials"]});
         }

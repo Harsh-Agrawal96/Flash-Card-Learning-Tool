@@ -21,10 +21,12 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [key, setKey] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     try{
       e.preventDefault();
+      setIsLoading(true);
       const formData = { email, password, key };
 
       const resData = await loginQuery(formData);
@@ -80,7 +82,7 @@ const LoginForm = () => {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isLoading}>{isLoading ? 'Loading...' : 'Login'}</button>
       </form>
     </div>
   );

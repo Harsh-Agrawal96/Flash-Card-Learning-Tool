@@ -116,12 +116,22 @@
     align-items: center;
     gap: 2em;
     padding-top: 2em;
+
+    & > button:hover {
+      background-color: #0056b3;
+    }
   }
 
   .controls > button{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
     padding: 10px 13px;
     font-size: 1em;
     width: 6em;
+    
   }
   .card-carousel span{
     color: white;

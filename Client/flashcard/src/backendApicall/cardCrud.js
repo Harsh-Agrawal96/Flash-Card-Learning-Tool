@@ -13,7 +13,6 @@ const addCardQuery = async (formData) => {
     });
 
     const resData = await response.json();
-    console.log(resData)
     if( !response.ok ){
         throw new Error( JSON.stringify(resData.msg || tryErr ));
     }

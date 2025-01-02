@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../public/css/cardcrud.css';
+import QuestionForm from './components/questionForm';
+import OptionsInput from './components/optionInput';
+import AnswerInput from './components/answerInput';
+import SubmitButton from './components/buttonSubmit';
 import { addCardQuery } from '../backendApicall/cardCrud.js';
 import { unknownError as Err, loginError as logErr } from '../utils/responses.js';
 
@@ -20,6 +24,7 @@ function AddCardForm() {
   })
   const [mcqans, setmcqans] = useState('');
   const [key, setKey] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,10 +38,6 @@ function AddCardForm() {
   }, [navigate]);
   const userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
-
-  const handleQuesType = async (e) =>{
-    setquestype(e.target.value);
-  }
 
   const handleMcqAns = async ( e ) => {
     setmcqans(e.target.value);
@@ -62,6 +63,7 @@ function AddCardForm() {
   const handleSubmit = async (e) => {
     try{
       e.preventDefault();
+      setIsLoading(true);
     
       let ans = formData.answer;
       let que = formData.question;
@@ -86,21 +88,11 @@ function AddCardForm() {
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="question">Question:</label>
-        <textarea
-          type="text"
-          id="question"
-          name="question"
-          value={formData.question}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <QuestionForm formData={formData} handleChange={handleChange} />
 
       <div className="form-group">
         <label htmlFor="answer">Select question type :</label>
-        <select className="card_numbers" name='quesType' value={questype} onChange={handleQuesType}>
+        <select className="card_numbers" name='quesType' value={questype} onChange={(e) => setquestype(e.target.value)}>
             <option value="" disabled>Select</option>
             <option value="1">Mcqa type questions</option>
             <option value="2">objective type questins</option>
@@ -108,80 +100,10 @@ function AddCardForm() {
       </div>
 
       { questype == 1 && (
-      
-          <div>
-              <div className="form-group">
-                  <label htmlFor="answer">Option A:</label>
-                  <input
-                      type="text"
-                      name="optionA"
-                      value={options.optionA}
-                      onChange={handleOptoinsChange} 
-                      required
-                  />
-              </div>
-
-              <div className="form-group">
-                  <label htmlFor="answer">Option B:</label>
-                  <input
-                      type="text"
-                      name="optionB"
-                      value={options.optionB}
-                      onChange={handleOptoinsChange} 
-                      required
-                  />
-              </div>
-
-              <div className="form-group">
-                  <label htmlFor="answer">Option C:</label>
-                  <input
-                      type="text"
-                      name="optionC"
-                      value={options.optionC}
-                      onChange={handleOptoinsChange} 
-                      required
-                  />
-              </div>
-
-              <div className="form-group">
-                  <label htmlFor="answer">Option D:</label>
-                  <input
-                      type="text"
-                      name="optionD"
-                      value={options.optionD}
-                      onChange={handleOptoinsChange}  
-                      required
-                  />
-              </div>
-          </div>
+          <OptionsInput options={options} handleOptoinsChange={handleOptoinsChange} />
       )}
 
-      {  questype == 2 && (
-          <div className="form-group">
-              <label htmlFor="answer">Answer:</label>
-              <textarea
-                type="text"
-                id="answer"
-                name="answer"
-                value={formData.answer}
-                onChange={handleChange}  
-                required
-              />
-          </div>
-      )}
-
-      {  questype == 1 && (
-          <div className="form-group">
-              <label htmlFor="answer">Answer :</label>
-              <select className="card_numbers" value={mcqans} name='mcqTypeAnswer' onChange={handleMcqAns}>
-                  <option value="" disabled>Select option</option>
-                  <option value="A">option A</option>
-                  <option value="B">option B</option>
-                  <option value="C">option C</option>
-                  <option value="D">option D</option>
-            </select>
-          </div>
-      )}
+      <AnswerInput questype={questype} mcqans={mcqans} handleMcqAns={handleMcqAns} formData={formData} handleChange={handleChange} />
 
         <div className="form-group">
           <label htmlFor="securityKey">Key:</label>
@@ -194,8 +116,7 @@ function AddCardForm() {
           />
         </div>
 
-
-      <button type="submit" className="submit-button">Submit</button>
+      <SubmitButton isLoading={isLoading} buttonText='Add' />
     </form>
   );
 }
