@@ -3,7 +3,7 @@ import { unknownError as tryErr } from "../utils/responses";
 
 const loginQuery = async (formData) => {
 
-    const response = await fetch('http://localhost:8000/login', {
+    const response = await fetch('https://flash-card-learning-tool.vercel.app/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

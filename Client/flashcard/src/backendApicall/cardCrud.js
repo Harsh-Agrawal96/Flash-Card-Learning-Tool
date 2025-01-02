@@ -4,7 +4,7 @@ import { unknownError as tryErr } from "../utils/responses";
 
 const addCardQuery = async (formData) => {
 
-    const response = await fetch('http://localhost:8000/card/add', {
+    const response = await fetch('https://flash-card-learning-tool.vercel.app/card/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ const addCardQuery = async (formData) => {
 
 const updateCardQuery = async (formData) => {
 
-    const response = await fetch('http://localhost:8000/card/update', {
+    const response = await fetch('https://flash-card-learning-tool.vercel.app/card/update', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ const updateCardQuery = async (formData) => {
   
 const deleteCardQuery = async (formData) => {
 
-    const response = await fetch('http://localhost:8000/card/delete', {
+    const response = await fetch('https://flash-card-learning-tool.vercel.app/card/delete', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

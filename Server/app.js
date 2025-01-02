@@ -1,10 +1,7 @@
 
 import express from "express";
 import dotenv from "dotenv";
-import { allAdminVerifyRoutes } from "./src/Routes/adminVerifyRoutes.js";
-import { allcardUpdateRoutes } from "./src/Routes/cardupdateRoutes.js";
-import { cardShowRoutes } from "./src/Routes/cardShowRoutes.js";
-import { allCardQueryRoutes } from "./src/Routes/cardQueryRoutes.js";
+import { initAllWebRoutes } from "./src/Routes/web.js";
 import allConfigurations from "./src/config/configs.js";
 
 dotenv.config();
@@ -13,12 +10,7 @@ const port = process.env.PORT || 4000;
 
 allConfigurations(app);
 
-
-
-allAdminVerifyRoutes(app);
-allcardUpdateRoutes(app);
-cardShowRoutes(app);
-allCardQueryRoutes(app);
+initAllWebRoutes(app);
 
 
 app.get("/", (req,res) => {

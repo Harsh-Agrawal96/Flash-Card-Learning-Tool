@@ -51,7 +51,7 @@ function McqsCards() {
         </div>
       <div className={`mcqcard card ${isFlipped ? 'flipped' : ''}`} onClick={handleFlip}>
         <div className="card-face card-front">
-          <p>{cards[currentIndex].Question} ?</p>
+          <p className='ques' >{cards[currentIndex].Question}</p>
           <ul className="options-list">
             <li><p>A. {cards[currentIndex].ChooseA}</p></li>
             <li><p>B. {cards[currentIndex].ChooseB}</p></li>
@@ -61,7 +61,7 @@ function McqsCards() {
         </div>
         <div className="card-face card-back">
           <span>Answer:</span>
-          <p>{cards[currentIndex].answerOption}. {cards[currentIndex].ans}</p>
+          <p className='ques' >{cards[currentIndex].answerOption}. {cards[currentIndex].ans}</p>
         </div>
       </div>
       <div className="controls">
