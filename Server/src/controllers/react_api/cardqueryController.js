@@ -1,6 +1,6 @@
 
 import * as queryCardService from "../../services/cardqueryServices.js";
-import { unknownError as tryErr } from "../../utils/responses.js";
+import { unknownError as tryErr, credentialsError as inputErr } from "../../utils/responses.js";
 
 
 let queryCards = async (req,res) => {
@@ -10,7 +10,7 @@ let queryCards = async (req,res) => {
 
         const admin = await queryCardService.checkAdmin(data.adminId);
         if( !admin ){
-            return res.status(400).json({ success: false, msg : ["Invalid Credentials"]});
+            return res.status(400).json({ success: false, msg : inputErr});
         }
 
         const cards = {};

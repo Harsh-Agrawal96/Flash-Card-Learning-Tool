@@ -1,5 +1,5 @@
 import * as cardUpdates from "../../services/cardupdateServices.js";
-import { unknownError as tryErr } from "../../utils/responses.js";
+import { unknownError as tryErr, credentialsError as inputErr } from "../../utils/responses.js";
 
 
 let deleteCard = async (req,res) => {
@@ -20,7 +20,7 @@ let deleteCard = async (req,res) => {
             return await performDeletion( res, card, admin, data.id, data.questype );
         }
 
-        res.status(400).json({ success: false, msg: [ "Invalid credentials" ]});
+        res.status(400).json({ success: false, msg: inputErr});
     }catch(err){
         res.status(500).json({ success: false, msg: tryErr });
     }
@@ -30,7 +30,7 @@ let performDeletion = async ( res, card, admin, cardId, type ) => {
     
     try{
         if( !card || !admin ){
-            return res.status(400).json({ success : false, msg : [ "Invalid credentials" ]});
+            return res.status(400).json({ success : false, msg : inputErr});
         }
 
         const response = await cardUpdates.cardDeletion(type, cardId);
@@ -49,7 +49,7 @@ let addCard = async (req,res) => {
 
         const admin = await cardUpdates.getAdmin(data.adminId,data.key);
         if( admin == null ){
-            return res.status(400).json({ success : false, msg : [ "Invalid credentials" ]});
+            return res.status(400).json({ success : false, msg : inputErr});
         }
 
         const response = await cardUpdates.cardAddition(data);
@@ -79,7 +79,7 @@ let updateCard = async (req,res) => {
             return await performUpdation( res, card, admin, data );
         }
 
-        res.status(400).json({ success: false, msg: [ "Invalid credentials" ]});
+        res.status(400).json({ success: false, msg: inputErr});
     }catch(err){
         res.status(500).json({ success: false, msg: tryErr });
     }
@@ -89,7 +89,7 @@ let performUpdation = async ( res, card, admin, data) => {
 
     try{
         if( !card || !admin ){
-            return res.status(400).json({ success : false, msg : [ "Invalid credentials" ]});
+            return res.status(400).json({ success : false, msg : inputErr});
         }
 
         const response = await cardUpdates.cardUpdation(data);

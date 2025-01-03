@@ -1,6 +1,6 @@
 
 import * as questions from "../../services/showCardServices.js"
-import { unknownError as tryErr } from "../../utils/responses.js";
+import { unknownError as tryErr, credentialsError as inputErr } from "../../utils/responses.js";
 
 
 let givecards = async ( req,res ) => {
@@ -45,7 +45,7 @@ let givecards = async ( req,res ) => {
             return res.status(200).json({ success: true, msg: arrayOfCards });
         }
 
-        return res.status(400).json({ success: true, msg: ["Invalid Cridentials"] });
+        return res.status(400).json({ success: true, msg: inputErr });
     }
     catch(err){
         return res.status(500).json({ success: false, msg : tryErr });

@@ -2,6 +2,9 @@
 import { checkAdmin } from "../../services/verifyServices.js";
 import jwt from "jsonwebtoken";
 import { unknownError as tryErr } from "../../utils/responses.js";
+import dotenv from "dotenv"
+
+dotenv.config();
 
 
 let handleLogin = async (req,res) => {
@@ -13,7 +16,7 @@ let handleLogin = async (req,res) => {
             return res.status(400).json({ success: false, msg: user.msg });
         }
 
-        const token = jwt.sign({ userId: user.id }, "harsh", { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         const { password: _, ...userDetails } = user;
 
         res.status(200).json({

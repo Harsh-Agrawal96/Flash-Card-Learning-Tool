@@ -1,5 +1,6 @@
 
 import { admin } from "../models/admins.js";
+import { credentialsError as inputErr } from "../utils/responses.js";
 
 
 let checkAdmin = (email, password, key) => {
@@ -10,7 +11,7 @@ let checkAdmin = (email, password, key) => {
                 email, email
             })
             if(!user || user.password != password || user.securityKey != key){
-                return resolve({ success: false, msg: [ "Invalid credentials" ]});
+                return resolve({ success: false, msg: inputErr});
             }
 
             resolve({ success: true, msg: user});
