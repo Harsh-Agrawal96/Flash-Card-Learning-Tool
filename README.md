@@ -104,10 +104,7 @@ To test admin functionalities, you can use the following credentials:
    ```bash
    cd Flash-Card-Learning-Tool/Client/flashcard
    ```
-   Create a `.env` file in the flashcard directory and add the variable values which are present in .env.example file like below:
-   ```env
-   BackendURL=Your-backend-url
-   ```
+   edit the backend api url with your backend server url with route in backendApicall folder
 
 8. Start the application server:
    ```bash
