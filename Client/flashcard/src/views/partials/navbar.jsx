@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../public/css/partials/header.css';
 import LogoImg from "../../public/images/logo.png";
+import Avatar from "../../public/images/avatar.jpg";
 
 const Header = () => {
  
@@ -35,7 +36,7 @@ const Header = () => {
                 { islog && (
                     <div className="header-nav">
                         <a className="header-link" href="/profile">
-                            <img src={LogoImg} alt="Profile" className="profile-image" />
+                            <img src={Avatar} alt="Profile" className="profile-image" />
                         </a>
                         <button className="logout-button" onClick={handleLogout}>
                             Logout
@@ -43,7 +44,7 @@ const Header = () => {
                     </div>
                 )}
             </div>
-      </header>
+        </header>
     );
   };
 

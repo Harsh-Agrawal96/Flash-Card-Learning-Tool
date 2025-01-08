@@ -14,6 +14,7 @@ import reportWebVitals from './reportWebVitals';
 import Header from './views/partials/navbar.jsx';
 import Footer from './views/partials/footer.jsx';
 import AllCards from "./views/allcard.jsx";
+import NotFound from './views/notFound.jsx';
 
 
 
@@ -32,7 +33,7 @@ root.render(
                     <Route path="/delete-card" element={<DeleteCard />} />
                     <Route path="/create-card" element={<AddCardForm />} />
                     <Route path="/update-card" element={<UpdateCard />} />
-                    <Route path="*" element={<h1>404 Not Found</h1>} />
+                    <Route path="*" element={<NotFound/>} />
                 </Routes>
                 < Footer />
             </div>
