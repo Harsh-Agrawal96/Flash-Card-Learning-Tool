@@ -36,10 +36,14 @@ function ObjCards() {
   const arrCards = location.state || null;
 
   useEffect(() => {
+
     // If no data is available, redirect to an error page or the home page
     if (arrCards == null) {
       navigate('/error');
     }
+
+    document.title = 'Objective Cards | Flashcard Learning'
+
   }, [arrCards, navigate]);
   if (arrCards == null) return null;
 

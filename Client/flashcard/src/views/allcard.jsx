@@ -49,6 +49,8 @@ const AllCards = () => {
   
     feachData(userDetails.msg._id);
 
+    document.title = 'All cards | Flashcard Learning'
+
   }, [navigate]);
   
   const userDetails = JSON.parse(localStorage.getItem('userDetails'));

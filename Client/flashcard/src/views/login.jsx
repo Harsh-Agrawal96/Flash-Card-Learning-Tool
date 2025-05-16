@@ -16,6 +16,9 @@ const LoginForm = () => {
     if ( token && userDetails) {
       navigate('/profile');
     }
+
+    document.title = 'Login | Flashcard Learning'
+
   }, [navigate]);
 
   const [email, setEmail] = useState('');

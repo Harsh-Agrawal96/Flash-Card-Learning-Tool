@@ -30,12 +30,16 @@ const UpdateCard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+
     const token = localStorage.getItem('token');
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
     if (!token || !userDetails) {
       navigate('/', { state : { message : logErr, type : 'msg'}});
     }
+
+    document.title = 'Update Card | Flashcard Learning'
+
   }, [navigate]);
   const userDetails = JSON.parse(localStorage.getItem('userDetails'));
   

@@ -30,14 +30,17 @@ function McqsCards() {
     const location = useLocation();
     const navigate = useNavigate();
   
-  
     const arrCards = location.state || null;
   
     useEffect(() => {
       if (arrCards == null) {
         navigate('/error');
       }
+
+      document.title = 'Mcqs Cards | Flashcard Learning'
+
     }, [arrCards, navigate]);
+
     if (arrCards == null) return null;
   
     const cards = arrCards.data;

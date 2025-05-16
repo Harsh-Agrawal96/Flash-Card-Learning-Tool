@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './../public/css/home.css';
 import { showCardQuery } from '../backendApicall/showCard.js';
@@ -50,6 +50,12 @@ function HomePage() {
     }
     
   };
+
+  useEffect(() => {
+
+    document.title = 'Flashcard Learning Tool';
+
+  }, []);
 
   return (
 

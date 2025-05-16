@@ -20,6 +20,9 @@ const DeleteCard = () => {
     if (!token || !userDetails) {
       navigate('/', { state : { message : logErr, type : 'msg'}});
     }
+
+    document.title = 'Delete Card | Flashcard Learning'
+
   }, [navigate]);
   const userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
