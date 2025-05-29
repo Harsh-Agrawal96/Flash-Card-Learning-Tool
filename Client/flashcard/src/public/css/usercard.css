@@ -38,7 +38,7 @@
       cursor: pointer;
       text-align: center;
       position: relative;
-      background-color: #f0f0f0;
+      background-color: #dedede;
       border-radius: 10px;
       word-wrap: break-word;
     }
@@ -73,7 +73,7 @@
   }
   
   .card-front {
-    background-color: #f0f0f0;
+    background-color: #dedede;
   }
   
   .card-back {
